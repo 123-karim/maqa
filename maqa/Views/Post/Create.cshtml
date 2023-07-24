@@ -1,0 +1,52 @@
+﻿@model maqa.controler.AuthorPostView
+@inject maqa.code.Idata<maqa.controler.Category> datahelper 
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 style="font-family:cairo">إنشاء</h1>
+
+<h4 style="font-family:cairo">معلومات المشاركة</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group">
+                <label asp-for="PostCategory" class="control-label"></label>
+                <select asp-for="PostCategory" asp-items="new SelectList(datahelper.Getalldata().Select(x=>x.Name))" class="form-control"></select>
+                <span asp-validation-for="PostCategory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Posttitle" class="control-label"></label>
+                <input asp-for="Posttitle" class="form-control" />
+                <span asp-validation-for="Posttitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostDiscription" class="control-label"></label>
+                <textarea asp-for="PostDiscription" class="form-control"></textarea>
+                <span asp-validation-for="PostDiscription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostImgUrl" class="control-label"></label>
+                <input asp-for="PostImgUrl" type="file" class="form-control" />
+                <span asp-validation-for="PostImgUrl" class="text-danger"></span>
+            </div>
+                        
+            <div class="form-group">
+                <input type="submit" value="انشاء" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,72 @@
+﻿@page 
+@model maqa.Pages.AllUsersModel
+@{
+}
+    <section class="bounce animated article-clean">
+        <div class="container">
+            <section class="team-boxed">
+                <div class="container">
+                    <div class="intro">
+                        <h2 class="text-center" style="font-family: Cairo, sans-serif;">ناشرونا</h2>
+                    </div>
+           
+                    <div class="row people" style="direction:rtl">
+
+                        @foreach (var item in Model.listAutor)
+                        {
+                            <div style="font-family:cairo" class="col-md-6 col-lg-4 item" data-aos="zoom-out">
+                                <div class="box">
+                                    <img class="rounded-circle" src="~/images/@item.ProfileImgUrl">
+                                    <h3 style="font-family:cairo" class="name">@item.UserName</h3>
+                                    <p style="font-family:cairo" class="title">@item.FullName</p>
+                                    <p style="font-family:cairo" class="description">@item.Bio </p>
+                                    <div class="social"><a href="@item.Facebook"><i class="fa fa-facebook-official"></i></a><a href="@item.Twitter"><i class="fa fa-twitter"></i></a><a href="@item.Instgram"><i class="fa fa-instagram"></i></a></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <nav class="text-center float-end" style="font-family: Lato, sans-serif; direction:rtl;border-color: var(--bs-red);margin: 10px;">
+                        <ul class="pagination">
+
+                            <form method="get" class="m-2">
+                                <input type="hidden" value="All" name="getcategorypost" />
+                                <input type="submit" class="form-control bg-danger" value="الصفحة الاولى" />
+                            </form>
+                            @if (Model.listAutor.Count > 0 && Model.listAutor.Count < Model.noofpost)
+                            {
+                                <form method="get" class="m-2">
+                                    <input type="hidden" value="back" name="getcategorypost" />
+                                    <input type="submit" class="form-control bg-info" value="رجوع" />
+                                    <input type="hidden" value="@Model.listAutor.First().Id" name="id" />
+                                </form>
+
+                            }
+                            @if (Model.listAutor.Count == Model.noofpost)
+                            {
+                                <form method="get" class="m-2">
+                                    <input type="hidden" value="Next" name="getcategorypost" />
+                                    <input type="submit" class="form-control bg-info" value="التالى" />
+                                    <input type="hidden" value="@Model.listAutor.Last().Id" name="id" />
+                                </form>
+
+                            }
+
+
+                        </ul>
+                    </nav>
+
+                </div>
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </nav>
+            </section>
+        </div>
+    </section>
